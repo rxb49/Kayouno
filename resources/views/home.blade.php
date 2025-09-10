@@ -1,6 +1,5 @@
 {{-- resources/views/home.blade.php --}}
 @include('layouts.navigation') {{-- Ton navbar modifié --}}
-
 <x-app-layout>
     <div class="bg-gray-900 text-white">
 
