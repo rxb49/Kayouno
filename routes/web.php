@@ -17,4 +17,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/test-db', function () {
+    try {
+        DB::connection()->getPdo();
+        $dbName = DB::connection()->getDatabaseName();
+        return "✅ Connexion réussie à la base de données : {$dbName}";
+    } catch (\Exception $e) {
+        return "❌ Erreur de connexion : " . $e->getMessage();
+    }
+});
+
 require __DIR__.'/auth.php';
