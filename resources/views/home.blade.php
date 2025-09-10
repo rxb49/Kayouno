@@ -50,7 +50,7 @@
                     <div class="flex justify-center space-x-2 mb-4 text-gray-400 text-sm">
                         <span>1★</span><span>2★</span><span>3★</span><span>4★</span><span>5★</span>
                     </div>
-                    <button class="bg-indigo-600 px-4 py-2 rounded-lg">Ouvrir (10 €)</button>
+                    <a href="/box/1" class="bg-indigo-600 px-4 py-2 rounded-lg inline-block">Ouvrir (10 €)</a>
                 </div>
 
                 {{-- Box 2 --}}
@@ -61,7 +61,7 @@
                     <div class="flex justify-center space-x-2 mb-4 text-gray-400 text-sm">
                         <span>1★</span><span>2★</span><span>3★</span><span>4★</span><span>5★</span>
                     </div>
-                    <button class="bg-indigo-600 px-4 py-2 rounded-lg">J’ose le 800 €</button>
+                    <a href="/box/2" class="bg-indigo-600 px-4 py-2 rounded-lg inline-block">J’ose le 800 €</a>
                 </div>
 
                 {{-- Box 3 --}}
@@ -71,12 +71,14 @@
                     <div class="flex justify-center space-x-2 mb-4 text-gray-400 text-sm">
                         <span>1★</span><span>2★</span><span>3★</span><span>4★</span><span>5★</span>
                     </div>
-                    <button class="bg-red-600 px-4 py-2 rounded-lg">Je suis fou (1 000 560 €)</button>
+                    <a href="/box/3" class="bg-red-600 px-4 py-2 rounded-lg inline-block">Je suis fou (1 000 560 €)</a>
                     <p class="text-xs text-yellow-400 mt-2">⚠️ Réservé aux inconscients</p>
                 </div>
+
             </div>
-            <p class="text-center text-gray-400 mt-6"><a href="#" class="underline">Voir le détail des probabilités</a></p>
+            <p class="text-center text-gray-400 mt-6"><a href="#chances" class="underline">Voir le détail des probabilités</a></p>
         </section>
+
 
         {{-- CHANCES --}}
         <section id="chances" class="py-12 bg-gray-800">
