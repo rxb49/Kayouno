@@ -19,9 +19,16 @@
             </div>
 
             <div class="flex justify-center space-x-4 mb-6">
-                <button class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg">Choisir ma box</button>
-                <button class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg">Voir les probabilités</button>
+                <a href="#mystery-boxes" 
+                class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg text-white text-center">
+                Choisir ma box
+                </a>
+                <a href="#chances" 
+                class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-white text-center">
+                Voir les probabilités
+                </a>
             </div>
+
 
             <p class="text-gray-400 text-sm">⏰ 23:45:12 — 1284 ouvertures aujourd'hui</p>
         </div>
@@ -32,7 +39,7 @@
         </div>
 
         {{-- MYSTERY BOXES --}}
-        <section class="py-12">
+        <section id="mystery-boxes" class="py-12">
             <h2 class="text-center text-2xl font-bold mb-8">Mystery Boxes</h2>
             <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-6">
 
@@ -72,7 +79,7 @@
         </section>
 
         {{-- CHANCES --}}
-        <section class="py-12 bg-gray-800">
+        <section id="chances" class="py-12 bg-gray-800">
             <h2 class="text-center text-2xl font-bold mb-6">Transparence totale des chances</h2>
             <div class="flex justify-center space-x-4 mb-6">
                 <button class="px-3 py-1 bg-gray-700 rounded">Box 1</button>
@@ -85,7 +92,7 @@
         </section>
 
         {{-- WHY SECTION --}}
-        <section class="py-12">
+        <section id="kayouno" class="py-12">
             <h2 class="text-center text-2xl font-bold mb-8">Pourquoi Kayouno ?</h2>
             <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center px-6">
                 <div>
@@ -107,7 +114,7 @@
         </section>
 
         {{-- TESTIMONIALS --}}
-        <section class="py-12 bg-gray-800">
+        <section id="avis" class="py-12 bg-gray-800">
             <h2 class="text-center text-2xl font-bold mb-8">Avis de nos chasseurs</h2>
             <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-6">
                 <div class="bg-gray-900 p-6 rounded-lg">
