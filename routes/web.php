@@ -9,6 +9,18 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/box/1', function () {
+    return view('box1');
+});
+
+Route::get('/box/2', function () {
+    return view('box2');
+});
+
+Route::get('/box/3', function () {
+    return view('box3');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
