@@ -1,6 +1,8 @@
 {{-- resources/views/home.blade.php --}}
 @include('layouts.navigation') {{-- Ton navbar modifié --}}
+
 @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/script.js'])
+
 
 
 <x-app-layout>
