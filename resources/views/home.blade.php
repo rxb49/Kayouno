@@ -1,8 +1,11 @@
 {{-- resources/views/home.blade.php --}}
 @include('layouts.navigation') {{-- Ton navbar modifié --}}
+<<<<<<< HEAD
 @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/script.js'])
 
 
+=======
+>>>>>>> 1c3bb3a (oui)
 <x-app-layout>
     <div class="bg-gray-900 text-white">
 

@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+
+
 Route::get('/', function () {
     return view('home');
 });
@@ -28,6 +30,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::get('/test-db', function () {
+    try {
+        DB::connection()->getPdo();
+        $dbName = DB::connection()->getDatabaseName();
+        return "✅ Connexion réussie à la base de données : {$dbName}";
+    } catch (\Exception $e) {
+        return "❌ Erreur de connexion : " . $e->getMessage();
+    }
+});
 
 Route::get('/test-db', function () {
     try {
@@ -40,3 +51,4 @@ Route::get('/test-db', function () {
 });
 
 require __DIR__.'/auth.php';
+
