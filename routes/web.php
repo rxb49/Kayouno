@@ -1,13 +1,12 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MysteryBoxController;
 use Illuminate\Support\Facades\Route;
 
 
+Route::get('/', [MysteryBoxController::class, 'getMysteryBox']);
 
-Route::get('/', function () {
-    return view('home');
-});
 
 Route::get('/box/1', function () {
     return view('box1');

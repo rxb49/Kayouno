@@ -2,20 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MysteryBox;
 use Illuminate\Http\Request;
 
 class MysteryBoxController extends Controller
 {
-    public function getMysteryBox(ProfileUpdateRequest $request): RedirectResponse
+    public function getMysteryBox(Request $request) // <- remplacer ProfileUpdateRequest par Request
     {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        $mysteryBoxs = MysteryBox::all(); // récupère toutes les MysteryBox
+        return view("home", ["mysteryBoxs" => $mysteryBoxs]);
     }
 }
