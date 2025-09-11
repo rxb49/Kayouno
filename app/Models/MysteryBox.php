@@ -12,7 +12,10 @@ class MysteryBox extends Model
     // 4) Colonnes modifiables en masse
     protected $fillable = [
         'nom',
-        'prix'
+        'prix',
+        'image',
+        'is_popular',
+        'is_danger'
     ];
     // 5) Casts (formatage/typage automatiques)
     protected $casts = ['prix' => 'decimal:2'];

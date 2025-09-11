@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\MysteryBoxController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 
+Route::get('/', [MysteryBoxController::class, 'getMysteryBox']);
 
 Route::get('/', function () {
     return view('home');

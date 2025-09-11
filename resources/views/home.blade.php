@@ -23,11 +23,11 @@
             </div>
 
             <div class="flex justify-center space-x-4 mb-6">
-                <a href="#mystery-boxes" 
+                <a href="#mystery-boxes"
                 class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg text-white text-center">
                 Choisir ma box
                 </a>
-                <a href="#chances" 
+                <a href="#chances"
                 class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-white text-center">
                 Voir les probabilités
                 </a>
@@ -36,7 +36,7 @@
 
             <p id="clock" class="text-gray-400 text-sm">
                 ⏰ <span id="time"></span> — 1284 ouvertures aujourd'hui
-            </p>        
+            </p>
         </div>
 
         {{-- Banner --}}
@@ -49,37 +49,36 @@
             <h2 class="text-center text-2xl font-bold mb-8">Mystery Boxes</h2>
             <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-6">
 
-                {{-- Box 1 --}}
-                <div class="bg-gray-800 p-6 rounded-2xl text-center">
-                    <h3 class="text-lg font-semibold mb-4">Box #1</h3>
-                    <p class="text-2xl font-bold mb-4">10 €</p>
-                    <div class="flex justify-center space-x-2 mb-4 text-gray-400 text-sm">
-                        <span>1★</span><span>2★</span><span>3★</span><span>4★</span><span>5★</span>
-                    </div>
-                    <a href="/box/1" class="bg-indigo-600 px-4 py-2 rounded-lg inline-block">Ouvrir (10 €)</a>
-                </div>
+                @foreach($mysteryBoxs as $box)
+                    <div class="bg-gray-800 p-6 rounded-2xl text-center
+                        @if($box->is_popular) border-2 border-indigo-500 @endif">
+                        {{-- Badge Populaire --}}
+                        @if($box->is_popular)
+                            <span class="bg-indigo-500 text-xs px-2 py-1 rounded-full">Populaire</span>
+                        @endif
 
-                {{-- Box 2 --}}
-                <div class="bg-gray-800 p-6 rounded-2xl text-center border-2 border-indigo-500">
-                    <span class="bg-indigo-500 text-xs px-2 py-1 rounded-full">Populaire</span>
-                    <h3 class="text-lg font-semibold mb-4">Box #2</h3>
-                    <p class="text-2xl font-bold mb-4">800 €</p>
-                    <div class="flex justify-center space-x-2 mb-4 text-gray-400 text-sm">
-                        <span>1★</span><span>2★</span><span>3★</span><span>4★</span><span>5★</span>
-                    </div>
-                    <a href="/box/2" class="bg-indigo-600 px-4 py-2 rounded-lg inline-block">J’ose le 800 €</a>
-                </div>
+                        <h3 class="text-lg font-semibold mb-4">{{ $box->nom }}</h3>
+                        <img src="data:image/jpeg;base64,{{ base64_encode($box->image) }}" alt="booster">
+                        <p class="text-2xl font-bold mb-4">{{ number_format($box->prix, 0, ',', ' ') }} €</p>
 
-                {{-- Box 3 --}}
-                <div class="bg-gray-800 p-6 rounded-2xl text-center">
-                    <h3 class="text-lg font-semibold mb-4">Box #3</h3>
-                    <p class="text-2xl font-bold mb-4">1 000 560 €</p>
-                    <div class="flex justify-center space-x-2 mb-4 text-gray-400 text-sm">
-                        <span>1★</span><span>2★</span><span>3★</span><span>4★</span><span>5★</span>
+                        {{-- Rareté / étoiles --}}
+                        <div class="flex justify-center space-x-2 mb-4 text-gray-400 text-sm">
+                            @for($i = 1; $i <= 5; $i++)
+                                <span>{{ $i }}★</span>
+                            @endfor
+                        </div>
+
+                        <a href="/box/{{ $box->id }}"
+                           class="bg-{{ $box->is_popular ? 'indigo' : 'red' }}-600 px-4 py-2 rounded-lg inline-block">
+                            {{ $box->button_text ?? "Ouvrir ({$box->prix} €)" }}
+                        </a>
+
+                        {{-- Optionnel : texte d'avertissement --}}
+                        @if($box->is_danger)
+                            <p class="text-xs text-yellow-400 mt-2">⚠️ Réservé aux inconscients</p>
+                        @endif
                     </div>
-                    <a href="/box/3" class="bg-red-600 px-4 py-2 rounded-lg inline-block">Je suis fou (1 000 560 €)</a>
-                    <p class="text-xs text-yellow-400 mt-2">⚠️ Réservé aux inconscients</p>
-                </div>
+                @endforeach
 
             </div>
             <p class="text-center text-gray-400 mt-6"><a href="#chances" class="underline">Voir le détail des probabilités</a></p>
@@ -171,4 +170,3 @@
         showImage('img1', firstBtn);
     });
 </script>
-    
