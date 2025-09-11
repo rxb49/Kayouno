@@ -1,5 +1,6 @@
 {{-- resources/views/box.blade.php --}}
 @include('layouts.navigation') {{-- Ton navbar modifié --}}
+@vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/script.js'])
 
 <x-app-layout>
 
@@ -30,7 +31,9 @@
                 </a>            
             </div>
 
-            <p class="text-gray-400 text-sm">⏰ 23:45:12 — 284 ouvertures aujourd'hui</p>
+            <p id="clock" class="text-gray-400 text-sm">
+                ⏰ <span id="time"></span> — 225 ouvertures aujourd'hui
+            </p>  
         </div>
 
         {{-- Box Details --}}

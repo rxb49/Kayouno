@@ -1,5 +1,7 @@
 {{-- resources/views/home.blade.php --}}
 @include('layouts.navigation') {{-- Ton navbar modifié --}}
+@vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/script.js'])
+
 
 <x-app-layout>
     <div class="bg-gray-900 text-white">
@@ -30,7 +32,9 @@
             </div>
 
 
-            <p class="text-gray-400 text-sm">⏰ 23:45:12 — 1284 ouvertures aujourd'hui</p>
+            <p id="clock" class="text-gray-400 text-sm">
+                ⏰ <span id="time"></span> — 1284 ouvertures aujourd'hui
+            </p>        
         </div>
 
         {{-- Banner --}}
