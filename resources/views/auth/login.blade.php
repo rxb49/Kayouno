@@ -1,423 +1,307 @@
+{{-- resources/views/auth/login.blade.php --}}
 <!DOCTYPE html>
-<html lang="fr" class="h-full">
+<html lang="fr">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tu es qui aujourd'hui ? - Kayouno</title>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+    >
+    <title>Connexion — Kayouno</title>
+
+    {{-- Palette + styles légers, sans dépendance Tailwind --}}
     <style>
-        :root {
-            --nuit: #0B0E12;
-            --gris-panel: #151A20;
-            --violet-neon: #7C3AED;
-            --vert-jackpot: #22C55E;
-            --dore-rare: #FACC15;
-            --rose-accent: #F472B6;
-            --texte-principal: #E5E7EB;
-            --texte-secondaire: #9CA3AF;
+        :root{
+            --night:#0B0E12;
+            --panel:#151A20;
+            --neon:#7C3AED;
+            --jackpot:#22C55E;
+            --gold:#FACC15;
+            --rose:#F472B6;
+            --text:#E5E7EB;
+            --muted:#9CA3AF;
+            --shadow: 0 20px 60px rgba(0,0,0,.45);
+            --radius:16px;
+            --radius-lg:22px;
         }
-        
-        * {
-            box-sizing: border-box;
+        *{box-sizing:border-box}
+        html,body{
+            height:100%;
+            margin:0;
+            background: radial-gradient(80% 60% at 50% 0%, rgba(124,58,237,0.12) 0%, rgba(11,14,18,0) 60%), var(--night);
+            color:var(--text);
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
         }
-        
-        body {
-            background: linear-gradient(135deg, #0B0E12 0%, #1a1f2e 50%, #0B0E12 100%);
-            background-attachment: fixed;
-            position: relative;
-            overflow-x: hidden;
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
+        a{color:var(--muted); text-decoration:none}
+        a:hover{color:var(--text)}
+        .wrap{
+            min-height:100%;
+            display:grid;
+            place-items:center;
+            padding:48px 16px;
         }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 25% 25%, rgba(124, 58, 237, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(250, 204, 21, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(244, 114, 182, 0.08) 0%, transparent 50%);
-            pointer-events: none;
-            z-index: 0;
+        .hero{
+            text-align:center;
+            margin-bottom:28px;
         }
-        
-        .content-wrapper {
-            position: relative;
-            z-index: 1;
+        .title{
+            font-family: Montserrat, Inter, system-ui, sans-serif;
+            font-weight:800;
+            font-size: clamp(28px, 4vw, 44px);
+            line-height:1.08;
+            margin:0 0 8px;
+            letter-spacing: .4px;
+            color: var(--text);
+            text-shadow:
+                0 0 22px rgba(124,58,237,.55),
+                0 0 8px rgba(124,58,237,.75);
         }
-        
-        .title-font {
-            font-family: 'Montserrat', sans-serif;
+        .subtitle{
+            color:var(--muted);
+            font-size:14px;
         }
-        
-        .logo-container {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #7C3AED, #9333EA, #A855F7);
-            border-radius: 50%;
-            margin-bottom: 2rem;
-            box-shadow: 
-                0 0 30px rgba(124, 58, 237, 0.4),
-                0 0 60px rgba(124, 58, 237, 0.2),
-                inset 0 2px 4px rgba(255, 255, 255, 0.1);
+        .card{
+            width: min(520px, 100%);
+            background: linear-gradient(180deg, rgba(21,26,32,.92), rgba(21,26,32,.88));
+            border: 1px solid rgba(124,58,237,.22);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            padding: 22px;
         }
-        
-        .logo-container::before {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            background: linear-gradient(45deg, #FACC15, #7C3AED, #F472B6, #FACC15);
-            border-radius: 50%;
-            z-index: -1;
-            animation: rotate 3s linear infinite;
+        .card-inner{
+            background: rgba(0,0,0,.18);
+            border: 1px solid rgba(255,255,255,.04);
+            border-radius: var(--radius);
+            padding: 22px;
         }
-        
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        label{
+            display:block;
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom:8px;
         }
-        
-        .logo-k {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        .input{
+            width:100%;
+            height:44px;
+            padding:0 14px;
+            border-radius:12px;
+            border:1px solid rgba(255,255,255,.08);
+            background:#0f141a;
+            color:var(--text);
+            outline:none;
+            transition:.15s ease;
         }
-        
-        .main-panel {
-            background: linear-gradient(145deg, rgba(21, 26, 32, 0.95), rgba(21, 26, 32, 0.8));
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(124, 58, 237, 0.3);
-            border-radius: 24px;
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(124, 58, 237, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            position: relative;
-            overflow: hidden;
+        .input::placeholder{color:#6b7280}
+        .input:focus{
+            border-color: rgba(124,58,237,.75);
+            box-shadow: 0 0 0 3px rgba(124,58,237,.25);
         }
-        
-        .main-panel::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.5), transparent);
+        .row{margin-bottom:16px}
+        .row:last-child{margin-bottom:0}
+
+        .actions{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:16px;
+            margin-top:8px;
+            margin-bottom: 12px;
         }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #7C3AED 0%, #9333EA 50%, #A855F7 100%);
-            border: none;
-            color: white;
-            font-weight: 600;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .remember{
+            display:flex; align-items:center; gap:8px;
+            color:var(--muted); font-size:13px;
         }
-        
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
+        .checkbox{
+            appearance:none; width:18px; height:18px; border-radius:6px;
+            border:1px solid rgba(255,255,255,.16);
+            background:#0f141a;
+            display:grid; place-items:center;
+            transition:.12s ease;
         }
-        
-        .btn-primary:hover::before {
-            left: 100%;
+        .checkbox:checked{
+            background: linear-gradient(135deg, var(--neon), #9F67FF);
+            border-color: transparent;
+            box-shadow: 0 0 10px rgba(124,58,237,.6);
         }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 
-                0 10px 30px rgba(124, 58, 237, 0.4),
-                0 0 20px rgba(124, 58, 237, 0.3);
+
+        .btn{
+            width:100%;
+            height:46px;
+            border:0;
+            border-radius: 12px;
+            cursor:pointer;
+            font-weight: 700;
+            letter-spacing:.2px;
+            transition: transform .06s ease, box-shadow .15s ease, filter .2s ease;
         }
-        
-        .btn-secondary {
+        .btn-primary{
+            background: linear-gradient(135deg, var(--neon), #9F67FF);
+            color:white;
+            box-shadow: 0 8px 26px rgba(124,58,237,.35);
+        }
+        .btn-primary:hover{ filter:brightness(1.08) }
+        .btn-primary:active{ transform: translateY(1px) }
+
+        .btn-ghost{
             background: transparent;
-            border: 2px solid #FACC15;
-            color: #FACC15;
-            font-weight: 500;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
+            border: 1px solid rgba(250,204,21,.35);
+            color: var(--gold);
         }
-        
-        .btn-secondary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(250, 204, 21, 0.1), rgba(250, 204, 21, 0.2));
-            transition: width 0.3s ease;
+        .btn-ghost:hover{
+            box-shadow: 0 0 18px rgba(250,204,21,.22) inset, 0 0 10px rgba(250,204,21,.2);
         }
-        
-        .btn-secondary:hover::before {
-            width: 100%;
+
+        .muted{ color:var(--muted); font-size: 13px; text-align:center; }
+
+        .errors{
+            margin: 10px 0 0;
+            padding:10px 12px;
+            border-radius:12px;
+            background: rgba(244,114,182,.10);
+            border: 1px solid rgba(244,114,182,.35);
+            color: #ffd9e8;
+            font-size: 13px;
         }
-        
-        .btn-secondary:hover {
-            box-shadow: 0 0 20px rgba(250, 204, 21, 0.3);
-            transform: translateY(-1px);
+        .status{
+            margin: 10px 0 0;
+            padding:10px 12px;
+            border-radius:12px;
+            background: rgba(34,197,94,.10);
+            border: 1px solid rgba(34,197,94,.35);
+            color: #bbf7d0;
+            font-size: 13px;
         }
-        
-        .input-field {
-            background: rgba(11, 14, 18, 0.6);
-            border: 2px solid rgba(156, 163, 175, 0.2);
-            color: #E5E7EB;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+
+        .foot{
+            margin-top: 18px;
+            text-align: center;
+            font-size: 14px;
         }
-        
-        .input-field:focus {
-            border-color: #7C3AED;
-            box-shadow: 
-                0 0 0 4px rgba(124, 58, 237, 0.1),
-                0 0 20px rgba(124, 58, 237, 0.2);
-            outline: none;
-            background: rgba(11, 14, 18, 0.8);
+        .sparkle{
+            display:inline-block; margin-right:6px;
+            width:18px; height:18px; border-radius:6px;
+            background: radial-gradient(circle at 30% 30%, #fff 0 10%, transparent 11%), radial-gradient(circle at 70% 70%, var(--gold) 0 12%, transparent 13%), linear-gradient(135deg, rgba(250,204,21,.45), rgba(124,58,237,.45));
+            box-shadow: 0 0 14px rgba(250,204,21,.4);
         }
-        
-        .input-field::placeholder {
-            color: rgba(156, 163, 175, 0.6);
-        }
-        
-        .marquee {
-            background: linear-gradient(270deg, #7C3AED, #FACC15, #F472B6, #7C3AED);
-            background-size: 400% 400%;
-            animation: gradientShift 4s ease infinite;
-        }
-        
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        .star {
-            color: #FACC15;
-            filter: drop-shadow(0 0 6px rgba(250, 204, 21, 0.6));
-            animation: starTwinkle 2s ease-in-out infinite alternate;
-        }
-        
-        @keyframes starTwinkle {
-            0% { opacity: 0.7; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.1); }
-        }
-        
-        .social-proof {
-            background: linear-gradient(135deg, rgba(21, 26, 32, 0.8), rgba(21, 26, 32, 0.4));
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(124, 58, 237, 0.2);
-        }
-        
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(156, 163, 175, 0.3), transparent);
-        }
-        
-        .toast {
-            animation: slideInUp 0.3s ease-out;
-        }
-        
-        @keyframes slideInUp {
-            from {
-                transform: translateY(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+
+        @media (max-width:480px){
+            .card{padding:16px}
+            .card-inner{padding:16px}
         }
     </style>
 </head>
-
-<body class="h-full">
-    <!-- Bandeau marquee -->
-    <div class="fixed top-0 left-0 right-0 z-50 marquee text-center py-3 text-sm font-semibold text-white shadow-lg">
-        <div class="animate-pulse">
-            ⭐ Drop ULURU: 0.01% — Livraison express dispo — Chronocailloux ⭐
-        </div>
+<body>
+<div class="wrap">
+    <div class="hero">
+        <h1 class="title">Tu es qui aujourd'hui&nbsp;?</h1>
+        <p class="subtitle">Connecte-toi pour ouvrir tes cailloux mystères.</p>
     </div>
 
-    <div class="content-wrapper min-h-screen flex items-center justify-center p-8 pt-24">
-        <div class="w-full max-w-lg">
-            <!-- Logo et titre -->
-            <div class="text-center mb-16">
-                <div class="logo-container">
-                    <span class="logo-k title-font">K</span>
+    <div class="card">
+        <div class="card-inner">
+            {{-- Message de status --}}
+            @if (session('status'))
+                <div class="status">{{ session('status') }}</div>
+            @endif
+
+            {{-- Erreurs --}}
+            @if ($errors->any())
+                <div class="errors">
+                    <strong>Oups…</strong>
+                    <ul style="margin:6px 0 0; padding-left:18px;">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
-                <h1 class="text-4xl font-bold title-font text-white mb-6 tracking-tight">
-                    Tu es qui aujourd'hui ?
-                </h1>
-                <p class="text-gray-400 text-lg font-medium">
-                    Connecte-toi pour tenter ta chance 🎰
-                </p>
-            </div>
+            @endif
 
-            <!-- Panel principal -->
-            <div class="main-panel p-12">
-                <!-- Session Status -->
-                <x-auth-session-status class="mb-8" :status="session('status')" />
+            <form method="POST" action="{{ route('login') }}" id="loginForm" autocomplete="on" style="margin-top: 10px;">
+                @csrf
 
-                <form method="POST" action="{{ route('login') }}" class="space-y-10">
-                    @csrf
-
-                    <!-- Email Address -->
-                    <div class="space-y-4">
-                        <label for="email" class="block text-base font-semibold text-gray-200">
-                            📧 Ton email magique
-                        </label>
-                        <input id="email" 
-                               class="input-field w-full px-5 py-4 rounded-2xl text-base font-medium"
-                               type="email" 
-                               name="email" 
-                               value="{{ old('email') }}" 
-                               required 
-                               autofocus 
-                               autocomplete="username"
-                               placeholder="ton-email@exemple.com" />
-                        @error('email')
-                            <p class="mt-3 text-sm text-red-400 font-medium">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <!-- Password -->
-                    <div class="space-y-4">
-                        <label for="password" class="block text-base font-semibold text-gray-200">
-                            🔐 Mot de passe secret
-                        </label>
-                        <input id="password" 
-                               class="input-field w-full px-5 py-4 rounded-2xl text-base font-medium"
-                               type="password"
-                               name="password"
-                               required 
-                               autocomplete="current-password"
-                               placeholder="••••••••" />
-                        @error('password')
-                            <p class="mt-3 text-sm text-red-400 font-medium">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <!-- Remember Me -->
-                    <div class="flex items-center space-x-3 py-2">
-                        <input id="remember_me" 
-                               type="checkbox" 
-                               class="w-5 h-5 rounded-lg border-2 border-gray-500 bg-transparent text-violet-500 focus:ring-violet-500 focus:ring-2 focus:ring-offset-0" 
-                               name="remember">
-                        <label for="remember_me" class="text-base text-gray-300 font-medium">
-                            Se souvenir de moi (pratique pour les sessions de jeu 🎲)
-                        </label>
-                    </div>
-
-                    <!-- Actions -->
-                    <div class="space-y-8 pt-6">
-                        <button type="submit" class="btn-primary w-full py-4 px-6 rounded-2xl font-bold text-base tracking-wide">
-                            🚀 Entrer dans l'arène
-                        </button>
-                        
-                        @if (Route::has('password.request'))
-                            <div class="text-center">
-                                <a href="{{ route('password.request') }}" 
-                                   class="text-base text-yellow-400 hover:text-yellow-300 transition-colors font-medium">
-                                    💭 Mot de passe oublié ? (ça arrive aux meilleurs...)
-                                </a>
-                            </div>
-                        @endif
-                    </div>
-                </form>
-
-                <!-- Profil aléatoire -->
-                <div class="mt-16 pt-10">
-                    <div class="divider mb-10"></div>
-                    <button type="button" 
-                            class="btn-secondary w-full py-4 px-6 rounded-2xl font-semibold text-base"
-                            onclick="generateRandomProfile()">
-                        🎭 Générer un profil aléatoire
-                    </button>
-                    <p class="text-sm text-gray-500 text-center mt-4 font-medium">
-                        Pour les joueurs anonymes qui aiment le mystère
-                    </p>
+                {{-- Email (nom du champ corrigé) --}}
+                <div class="row">
+                    <label for="email">Email</label>
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        class="input"
+                        placeholder="jackpot@casino.com"
+                        value="{{ old('email') }}"
+                        required
+                        autofocus
+                        autocomplete="username"
+                    >
                 </div>
-            </div>
 
-            <!-- Footer fun -->
-            <div class="text-center mt-12 space-y-6">
-                <div class="flex items-center justify-center space-x-3 text-base text-gray-400">
-                    <span class="star text-xl">⭐</span>
-                    <span class="font-medium">Pas encore de compte ?</span>
-                    <span class="star text-xl">⭐</span>
+                {{-- Mot de passe --}}
+                <div class="row">
+                    <label for="password">Mot de passe</label>
+                    <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        class="input"
+                        placeholder="•••• (pas 1234 stp)"
+                        required
+                        autocomplete="current-password"
+                    >
                 </div>
-                <a href="{{ route('register') }}" 
-                   class="inline-block text-base font-semibold text-violet-400 hover:text-violet-300 transition-colors">
-                    🎰 Créer un compte et tenter le jackpot
-                </a>
-            </div>
 
-            <!-- Social proof -->
-            <div class="social-proof text-center mt-10 p-5 rounded-2xl">
-                <p class="text-sm text-gray-300 font-medium">
-                    <span class="text-green-400 font-bold">1,284</span> ouvertures aujourd'hui
-                    <span class="mx-3 text-gray-500">•</span>
-                    <span class="text-yellow-400 font-semibold">Dernière connexion il y a 2 min</span>
-                </p>
-            </div>
+                <div class="actions">
+                    <label class="remember">
+                        <input type="checkbox" name="remember" class="checkbox" {{ old('remember') ? 'checked' : '' }}>
+                        Se souvenir de moi
+                    </label>
+
+                    @if (Route::has('password.request'))
+                        <a href="{{ route('password.request') }}">Mot de passe oublié&nbsp;?</a>
+                    @endif
+                </div>
+
+                <button type="submit" class="btn btn-primary">Se connecter</button>
+
+                <div class="foot">
+                    Pas encore de compte ?
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" style="color:var(--rose)">Créer un compte</a>
+                    @endif
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
-    <script>
-        function generateRandomProfile() {
-            const fakeEmails = [
-                'joueur.mysterieux@casino.net',
-                'chance.supreme@jackpot.com',
-                'pierre.collector@rare.fr',
-                'lucky.winner@kayouno.fr',
-                'caillou.hunter@legend.com'
-            ];
-            
-            const randomEmail = fakeEmails[Math.floor(Math.random() * fakeEmails.length)];
-            
-            document.getElementById('email').value = randomEmail;
-            document.getElementById('password').value = 'motdepasse123';
-            
-            // Toast notification
-            const toast = document.createElement('div');
-            toast.className = 'fixed bottom-4 right-4 bg-gray-800 border border-yellow-400 text-yellow-400 px-4 py-3 rounded-lg shadow-lg z-50';
-            toast.innerHTML = `
-                <div class="flex items-center space-x-2">
-                    <span>🎭</span>
-                    <span class="text-sm">Profil aléatoire généré ! (watermark: fake)</span>
-                </div>
-            `;
-            document.body.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.remove();
-            }, 3000);
-        }
-    </script>
+{{-- Mini-JS pour remplir des identifiants random & petit effet neon --}}
+<script>
+    // Neon breathing on the title
+    (function(){
+        const t = document.querySelector('.title');
+        let dir = 1, glow = 0.55, step = 0.01;
+        setInterval(() => {
+            glow += step * dir;
+            if (glow > 0.95 || glow < 0.35) dir *= -1;
+            t.style.textShadow =
+                `0 0 22px rgba(124,58,237,${glow}), 0 0 8px rgba(124,58,237,${Math.min(glow+0.2,1)})`;
+        }, 40);
+    })();
+
+    // Random profile filler
+    document.getElementById('fillRandom').addEventListener('click', () => {
+        const names = ['lucky','vegas','golden','supernova','glow','stardust','royal','mytho','jackpot','highroller'];
+        const n = names[Math.floor(Math.random()*names.length)];
+        const num = Math.floor(100 + Math.random()*899);
+        const email = `${n}${num}@casino.com`;
+        const passBank = ['MysteryBox!2025','Kayouno#777','Gold&Neon42','LuckySpin_84','Cr0wn^Jackpot'];
+        const pwd = passBank[Math.floor(Math.random()*passBank.length)];
+        document.getElementById('login').value = email;
+        document.getElementById('password').value = pwd;
+        // petit feedback visuel
+        const btn = document.getElementById('fillRandom');
+        btn.style.filter = 'brightness(1.15)';
+        setTimeout(()=> btn.style.filter='', 180);
+    });
+</script>
 </body>
 </html>
