@@ -4,7 +4,10 @@
             {{-- Logo + Mystery Box --}}
             <div class="flex items-center space-x-6">
                 <a href="/" class="text-xl font-bold text-gray-900 dark:text-white">Kayouno</a>
-                <a href="#mystery-boxes" class="text-gray-700 dark:text-gray-300 hover:text-indigo-500">Mystery Box</a>
+                <a href="/#mystery-boxes" class="text-gray-700 dark:text-gray-300 hover:text-indigo-500">Mystery Box</a>
+                <a href="/#chances" class="text-gray-700 dark:text-gray-300 hover:text-indigo-500">Chances</a>
+                <a href="/#kayouno" class="text-gray-700 dark:text-gray-300 hover:text-indigo-500">Kayouno</a>
+                <a href="/#avis" class="text-gray-700 dark:text-gray-300 hover:text-indigo-500">Avis</a>
             </div>
 
             {{-- Desktop Menu droite --}}
@@ -54,7 +57,15 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="#mystery-boxes">Mystery Box</x-responsive-nav-link>
         </div>
-
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link href="#chances">Chances</x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link href="#kayouno">Kayouno</x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link href="#avis">Avis</x-responsive-nav-link>
+        </div>
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             @guest
                 <x-responsive-nav-link href="{{ route('login') }}">Connexion</x-responsive-nav-link>

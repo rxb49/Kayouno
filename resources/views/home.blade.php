@@ -1,5 +1,7 @@
 {{-- resources/views/home.blade.php --}}
 @include('layouts.navigation') {{-- Ton navbar modifié --}}
+@vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/script.js'])
+
 
 <x-app-layout>
     <div class="bg-gray-900 text-white">
@@ -19,11 +21,20 @@
             </div>
 
             <div class="flex justify-center space-x-4 mb-6">
-                <button class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg">Choisir ma box</button>
-                <button class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg">Voir les probabilités</button>
+                <a href="#mystery-boxes" 
+                class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg text-white text-center">
+                Choisir ma box
+                </a>
+                <a href="#chances" 
+                class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-white text-center">
+                Voir les probabilités
+                </a>
             </div>
 
-            <p class="text-gray-400 text-sm">⏰ 23:45:12 — 1284 ouvertures aujourd'hui</p>
+
+            <p id="clock" class="text-gray-400 text-sm">
+                ⏰ <span id="time"></span> — 1284 ouvertures aujourd'hui
+            </p>        
         </div>
 
         {{-- Banner --}}
@@ -32,7 +43,7 @@
         </div>
 
         {{-- MYSTERY BOXES --}}
-        <section class="py-12">
+        <section id="mystery-boxes" class="py-12">
             <h2 class="text-center text-2xl font-bold mb-8">Mystery Boxes</h2>
             <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-6">
 
@@ -43,7 +54,7 @@
                     <div class="flex justify-center space-x-2 mb-4 text-gray-400 text-sm">
                         <span>1★</span><span>2★</span><span>3★</span><span>4★</span><span>5★</span>
                     </div>
-                    <button class="bg-indigo-600 px-4 py-2 rounded-lg">Ouvrir (10 €)</button>
+                    <a href="/box/1" class="bg-indigo-600 px-4 py-2 rounded-lg inline-block">Ouvrir (10 €)</a>
                 </div>
 
                 {{-- Box 2 --}}
@@ -54,7 +65,7 @@
                     <div class="flex justify-center space-x-2 mb-4 text-gray-400 text-sm">
                         <span>1★</span><span>2★</span><span>3★</span><span>4★</span><span>5★</span>
                     </div>
-                    <button class="bg-indigo-600 px-4 py-2 rounded-lg">J’ose le 800 €</button>
+                    <a href="/box/2" class="bg-indigo-600 px-4 py-2 rounded-lg inline-block">J’ose le 800 €</a>
                 </div>
 
                 {{-- Box 3 --}}
@@ -64,28 +75,34 @@
                     <div class="flex justify-center space-x-2 mb-4 text-gray-400 text-sm">
                         <span>1★</span><span>2★</span><span>3★</span><span>4★</span><span>5★</span>
                     </div>
-                    <button class="bg-red-600 px-4 py-2 rounded-lg">Je suis fou (1 000 560 €)</button>
+                    <a href="/box/3" class="bg-red-600 px-4 py-2 rounded-lg inline-block">Je suis fou (1 000 560 €)</a>
                     <p class="text-xs text-yellow-400 mt-2">⚠️ Réservé aux inconscients</p>
                 </div>
+
             </div>
-            <p class="text-center text-gray-400 mt-6"><a href="#" class="underline">Voir le détail des probabilités</a></p>
+            <p class="text-center text-gray-400 mt-6"><a href="#chances" class="underline">Voir le détail des probabilités</a></p>
         </section>
 
+
         {{-- CHANCES --}}
-        <section class="py-12 bg-gray-800">
+        <section id="chances" class="py-12 bg-gray-800">
             <h2 class="text-center text-2xl font-bold mb-6">Transparence totale des chances</h2>
+
             <div class="flex justify-center space-x-4 mb-6">
-                <button class="px-3 py-1 bg-gray-700 rounded">Box 1</button>
-                <button class="px-3 py-1 bg-gray-700 rounded">Box 2</button>
-                <button class="px-3 py-1 bg-gray-700 rounded">Box 3</button>
+                <button onclick="showImage('img1', this)" class="px-3 py-1 bg-gray-700 rounded">Box 1</button>
+                <button onclick="showImage('img2', this)" class="px-3 py-1 bg-gray-700 rounded">Box 2</button>
+                <button onclick="showImage('img3', this)" class="px-3 py-1 bg-gray-700 rounded">Box 3</button>
             </div>
+
             <div class="max-w-lg mx-auto">
-                <img src="/images/chart.png" alt="Graphique des chances" class="w-full">
+                <img id="img1" src="/images/MysteryBox1.png" alt="Graphique Box 1" class="w-full hidden">
+                <img id="img2" src="/images/MysteryBox2.png" alt="Graphique Box 2" class="w-full hidden">
+                <img id="img3" src="/images/MysteryBox3.png" alt="Graphique Box 3" class="w-full hidden">
             </div>
         </section>
 
         {{-- WHY SECTION --}}
-        <section class="py-12">
+        <section id="kayouno" class="py-12">
             <h2 class="text-center text-2xl font-bold mb-8">Pourquoi Kayouno ?</h2>
             <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center px-6">
                 <div>
@@ -107,7 +124,7 @@
         </section>
 
         {{-- TESTIMONIALS --}}
-        <section class="py-12 bg-gray-800">
+        <section id="avis" class="py-12 bg-gray-800">
             <h2 class="text-center text-2xl font-bold mb-8">Avis de nos chasseurs</h2>
             <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-6">
                 <div class="bg-gray-900 p-6 rounded-lg">
@@ -127,4 +144,29 @@
 
     </div>
 </x-app-layout>
+
+<script>
+    function showImage(id, btn) {
+        // cacher toutes les images
+        document.querySelectorAll('#chances img').forEach(img => img.classList.add('hidden'));
+        // afficher uniquement l'image correspondante
+        document.getElementById(id).classList.remove('hidden');
+
+        // retirer la classe active de tous les boutons
+        document.querySelectorAll('#chances button').forEach(b => {
+            b.classList.remove('bg-indigo-600', 'text-white');
+            b.classList.add('bg-gray-700');
+        });
+
+        // ajouter la classe active au bouton cliqué
+        btn.classList.remove('bg-gray-700');
+        btn.classList.add('bg-indigo-600', 'text-white');
+    }
+
+    // Afficher la première image par défaut + bouton actif
+    document.addEventListener("DOMContentLoaded", () => {
+        let firstBtn = document.querySelector('#chances button');
+        showImage('img1', firstBtn);
+    });
+</script>
     
