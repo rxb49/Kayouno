@@ -11,6 +11,10 @@ class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
+    
+    // Use the actual table name and disable timestamps to match the existing schema
+    protected $table = 'User';
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +22,9 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
+        'remember_token',
     ];
 
     /**
@@ -46,3 +50,4 @@ class User extends Authenticatable
         ];
     }
 }
+
