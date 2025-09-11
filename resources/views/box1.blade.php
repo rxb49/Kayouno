@@ -49,7 +49,7 @@
                     <span>4★ — 4%</span>
                     <span>5★ — 0.5%</span>
                 </div>
-                <button class="bg-indigo-600 px-4 py-2 rounded-lg">Ouvrir (10 €)</button>
+                <a href="/box/1/payment" class="bg-indigo-600 px-4 py-2 rounded-lg">Ouvrir (10 €)</a>
             </div>
         </section>
 

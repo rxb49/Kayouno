@@ -1,6 +1,6 @@
 {{-- resources/views/box.blade.php --}}
 @include('layouts.navigation') {{-- Ton navbar modifié --}}
-@vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/script.js'])
+@vite(['resources/css/app.css', 'resources/js/app.js'])
 
 <x-app-layout>
 
@@ -49,7 +49,7 @@
                     <span>4★ — 8%</span>
                     <span>5★ — 3%</span>
                 </div>
-                <button class="bg-indigo-600 px-4 py-2 rounded-lg">Ouvrir (800 €)</button>
+                <a href="/box/2/payment" class="bg-indigo-600 px-4 py-2 rounded-lg">Ouvrir (800 €)</a>
             </div>
         </section>
 
