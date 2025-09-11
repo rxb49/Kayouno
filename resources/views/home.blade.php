@@ -83,13 +83,17 @@
         {{-- CHANCES --}}
         <section id="chances" class="py-12 bg-gray-800">
             <h2 class="text-center text-2xl font-bold mb-6">Transparence totale des chances</h2>
+
             <div class="flex justify-center space-x-4 mb-6">
-                <button class="px-3 py-1 bg-gray-700 rounded">Box 1</button>
-                <button class="px-3 py-1 bg-gray-700 rounded">Box 2</button>
-                <button class="px-3 py-1 bg-gray-700 rounded">Box 3</button>
+                <button onclick="showImage('img1', this)" class="px-3 py-1 bg-gray-700 rounded">Box 1</button>
+                <button onclick="showImage('img2', this)" class="px-3 py-1 bg-gray-700 rounded">Box 2</button>
+                <button onclick="showImage('img3', this)" class="px-3 py-1 bg-gray-700 rounded">Box 3</button>
             </div>
+
             <div class="max-w-lg mx-auto">
-                <img src="/images/chart.png" alt="Graphique des chances" class="w-full">
+                <img id="img1" src="/images/MysteryBox1.png" alt="Graphique Box 1" class="w-full hidden">
+                <img id="img2" src="/images/MysteryBox2.png" alt="Graphique Box 2" class="w-full hidden">
+                <img id="img3" src="/images/MysteryBox3.png" alt="Graphique Box 3" class="w-full hidden">
             </div>
         </section>
 
@@ -136,4 +140,29 @@
 
     </div>
 </x-app-layout>
+
+<script>
+    function showImage(id, btn) {
+        // cacher toutes les images
+        document.querySelectorAll('#chances img').forEach(img => img.classList.add('hidden'));
+        // afficher uniquement l'image correspondante
+        document.getElementById(id).classList.remove('hidden');
+
+        // retirer la classe active de tous les boutons
+        document.querySelectorAll('#chances button').forEach(b => {
+            b.classList.remove('bg-indigo-600', 'text-white');
+            b.classList.add('bg-gray-700');
+        });
+
+        // ajouter la classe active au bouton cliqué
+        btn.classList.remove('bg-gray-700');
+        btn.classList.add('bg-indigo-600', 'text-white');
+    }
+
+    // Afficher la première image par défaut + bouton actif
+    document.addEventListener("DOMContentLoaded", () => {
+        let firstBtn = document.querySelector('#chances button');
+        showImage('img1', firstBtn);
+    });
+</script>
     

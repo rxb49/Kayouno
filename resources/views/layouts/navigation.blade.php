@@ -4,10 +4,10 @@
             {{-- Logo + Mystery Box --}}
             <div class="flex items-center space-x-6">
                 <a href="/" class="text-xl font-bold text-gray-900 dark:text-white">Kayouno</a>
-                <a href="#mystery-boxes" class="text-gray-700 dark:text-gray-300 hover:text-indigo-500">Mystery Box</a>
-                <a href="#chances" class="text-gray-700 dark:text-gray-300 hover:text-indigo-500">Chances</a>
-                <a href="#kayouno" class="text-gray-700 dark:text-gray-300 hover:text-indigo-500">Kayouno</a>
-                <a href="#avis" class="text-gray-700 dark:text-gray-300 hover:text-indigo-500">Avis</a>
+                <a href="/#mystery-boxes" class="text-gray-700 dark:text-gray-300 hover:text-indigo-500">Mystery Box</a>
+                <a href="/#chances" class="text-gray-700 dark:text-gray-300 hover:text-indigo-500">Chances</a>
+                <a href="/#kayouno" class="text-gray-700 dark:text-gray-300 hover:text-indigo-500">Kayouno</a>
+                <a href="/#avis" class="text-gray-700 dark:text-gray-300 hover:text-indigo-500">Avis</a>
             </div>
 
             {{-- Desktop Menu droite --}}

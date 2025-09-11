@@ -20,18 +20,21 @@
             </div>
 
             <div class="flex justify-center space-x-4 mb-6">
-                <button class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg">Ouvrir la Box</button>
+                <a href="#box" 
+                class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-white text-center">
+                Ouvrir la Box
+                </a>  
                 <a href="#chances" 
                 class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-white text-center">
                 Voir les probabilités
-                </a>            
+                </a>             
             </div>
 
             <p class="text-gray-400 text-sm">⏰ 23:45:12 — 284 ouvertures aujourd'hui</p>
         </div>
 
         {{-- Box Details --}}
-        <section id="chances" class="py-12">
+        <section id="box" class="py-12">
             <div class="max-w-lg mx-auto bg-gray-800 p-6 rounded-2xl text-center">
                 <h2 class="text-xl font-bold mb-4">Box #3</h2>
                 <p class="text-2xl font-bold mb-4">1 000 560 €</p>
@@ -44,6 +47,14 @@
                     <span>5★ — 10%</span>
                 </div>
                 <button class="bg-indigo-600 px-4 py-2 rounded-lg">Ouvrir (1 000 560 €)</button>
+            </div>
+        </section>
+
+        {{-- CHANCES --}}
+        <section id="chances" class="py-12 bg-gray-800">
+            <h2 class="text-center text-2xl font-bold mb-6">Transparence totale des chances</h2>
+            <div class="max-w-lg mx-auto">
+                <img id="img1" src="/images/MysteryBox3.png" alt="Graphique Box 1">
             </div>
         </section>
 
